@@ -1,0 +1,16 @@
+# Lefthook Git Hooks Manager Main Config File
+# For more information, see: https://lefthook.dev/configuration/
+---
+pre-commit:
+  parallel: true
+  jobs:
+    - name: lint
+      group:
+        jobs:
+          - name: yamllint
+            run: yamllint -s {staged_files}
+            glob: "**.{yml,yaml}"
+          - name: markdownlint
+            run: markdownlint-cli2 {staged_files}
+            glob: "*.md"
+...
